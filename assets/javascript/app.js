@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     // VAR
     var name = "";
-    var role = " ";
+    var destination = " ";
     var start = " ";
     var rate = " ";
 
@@ -23,15 +23,15 @@ $(document).ready(function () {
     $("body").on("click", "#btn-add", function () {
         event.preventDefault();
         name = $("#name").val().trim();
-        role = $("#role").val().trim();
-        start = moment($("#start").val().trim(), "MM/DD/YYYY").format("X");
+        destination = $("#destination").val().trim();
+        start = $("#start").val().trim();
         rate = $("#rate").val().trim();
 
         console.log("working")
         // STORES IN DATABASE
         database.ref().push({
             name: name,
-            role: role,
+            destination: destination,
             start: start,
             rate: rate,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -42,11 +42,10 @@ $(document).ready(function () {
         console.log(childSnapshot.val())
         $(".table-data").prepend(
             "<tr><td>" + childSnapshot.val().name + "</td>" +
-            "<td>" + childSnapshot.val().role + "</td>" +
+            "<td>" + childSnapshot.val().destination + "</td>" +
             "<td>" + childSnapshot.val().start + "</td>" +
             "<td>" + childSnapshot.val().monthsWorked + "</td>" +
-            "<td>" + childSnapshot.val().rate + "</td>" +
-            "<td>" + childSnapshot.val().amountPaid + "</td></tr>"
+            "<td>" + childSnapshot.val().rate + "</td></tr>"
         );
     });
 
