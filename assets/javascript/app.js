@@ -27,7 +27,6 @@ $(document).ready(function () {
         start = $("#start").val().trim();
         rate = $("#rate").val().trim();
 
-        console.log("working")
         // STORES IN DATABASE
         database.ref().push({
             name: name,
@@ -39,13 +38,20 @@ $(document).ready(function () {
     });
     // PUSHES TO THE TABLE
     database.ref().on("child_added", function (childSnapshot) {
-        console.log(childSnapshot.val())
+        var timeTrain = moment(childSnapshot.val().start, "HH:mm").subtract(1, "years");
+        var timeDif = moment().diff(moment(timeTrain), "minutes");
+        var trainRate = childSnapshot.val().rate;
+        var timeAway = timeDif % trainRate;
+        var timeNext = trainRate - timeAway;
+        var time = moment().add(timeNext, "minutes");
+        var arrival = moment(time).format("HH:mm");
+        
         $(".table-data").prepend(
             "<tr><td>" + childSnapshot.val().name + "</td>" +
             "<td>" + childSnapshot.val().destination + "</td>" +
-            "<td>" + childSnapshot.val().start + "</td>" +
-            "<td>" + childSnapshot.val().monthsWorked + "</td>" +
-            "<td>" + childSnapshot.val().rate + "</td></tr>"
+            "<td>" + childSnapshot.val().rate + "</td>" +
+            "<td>" + timeNext + " Minutes" + "</td>" +
+            "<td>" + arrival + "</td></tr>"
         );
     });
 
