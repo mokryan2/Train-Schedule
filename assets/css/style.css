@@ -1,8 +1,4 @@
-body {
-    cursor: pointer;
- }
- 
- .jumbotron {
+.jumbotron {
     background-color: dimgrey;
     color: black;
  }
@@ -20,6 +16,14 @@ body {
     color: black;
  }
 
+label{
+    font-weight: bold;
+}
+
+#btn-add{
+    cursor: pointer;
+}
+
 #name:hover, #destination:hover, #start:hover, #rate:hover{
 border: 3px dashed red;
  }
@@ -28,7 +32,7 @@ border: 3px dashed red;
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 10%;
-    min-height: 10%;
+    min-width: 100%;
+    min-height: 100%;
     z-index: -1;
  }
