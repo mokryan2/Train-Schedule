@@ -38,7 +38,7 @@ $(document).ready(function () {
     });
     // PUSHES TO THE TABLE
     database.ref().on("child_added", function (childSnapshot) {
-        var timeTrain = moment(childSnapshot.val().start, "HH:mm").subtract(1, "years");
+        var timeTrain = moment(childSnapshot.val().start, "HH:MM").subtract(1, "years");
         var timeDif = moment().diff(moment(timeTrain), "minutes");
         var trainRate = childSnapshot.val().rate;
         var timeAway = timeDif % trainRate;
